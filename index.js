@@ -3,6 +3,16 @@ const app = express()
 const dotenv = require('dotenv')
 dotenv.config()
 
+const authorization = require("./middleware/authorization");
+const authRoutes = require("./routes/auth")
+const jobRoutes = require("./routes/job")
+
+app.use(bodyParser.urlencoded({extended: false}))
+app.use(bodyParser.json())
+
+app.use("api/auth", authRoutes);
+app.use("api/job", jobRoutes);
+
 
 app.get('/health', (req, res) => {
     res.json({
