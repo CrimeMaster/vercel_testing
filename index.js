@@ -11,5 +11,9 @@ app.get('/health', (req, res) => {
     })
 })
 app.listen(process.env.port, () => {
+    mongoose
+    .connect(process.env.MONGODB_CONNECT_URI)
+    .then(() => console.log("connection succesful"))
+    .catch((error) => console.log(error))
     console.log(`Server Running Succesfully on http://localhost:${process.env.port}`)
 })
