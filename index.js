@@ -5,12 +5,18 @@ const mongoose = require('mongoose')
 const dotenv = require('dotenv')
 const cors = require('cors')
 dotenv.config()
-
+const authorization = require("./middleware/authorization");
+const authRoutes = require("./routes/auth");
+const jobRoutes = require("./routes/job");
 
 
 app.use(cors())
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
+
+//Routes
+app.use("api/auth", authRoutes);
+app.use("api/job", jobRoutes);
 
 
 
