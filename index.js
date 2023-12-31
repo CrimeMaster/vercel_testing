@@ -5,11 +5,14 @@ const app = express()
 const dotenv = require('dotenv')
 dotenv.config()
 const cors = require('cors')
+const home = require("./routes/home");
 
 app.use(cors())
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
 
+//routes
+app.use("/home", home)
 
 app.get('/health', (req, res) => {
     res.json({
