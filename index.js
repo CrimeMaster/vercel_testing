@@ -6,16 +6,12 @@ const dotenv = require('dotenv')
 const cors = require('cors')
 dotenv.config()
 
-const authorization = require("./middleware/authorization");
-const authRoutes = require("./routes/auth")
-const jobRoutes = require("./routes/job")
+
 
 app.use(cors())
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
 
-app.use("api/auth", authRoutes);
-app.use("api/job", jobRoutes);
 
 
 app.get('/health', (req, res) => {
