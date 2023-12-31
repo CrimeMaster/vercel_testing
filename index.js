@@ -6,6 +6,7 @@ const dotenv = require('dotenv')
 dotenv.config()
 const cors = require('cors')
 const home = require("./routes/home");
+const authorization = require("./middleware/authorization");
 
 app.use(cors())
 app.use(bodyParser.urlencoded({extended: false}))
@@ -21,6 +22,12 @@ app.get('/health', (req, res) => {
     })
 })
 
+app.get("/page", authorization, (req, res) => {
+    res.json({
+      status: "active",
+      message: "running",
+    });
+  });
 app.listen(process.env.port, () => {
     mongoose
     .connect(process.env.MONGODB_CONNECT_URI)
