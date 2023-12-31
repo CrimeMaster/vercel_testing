@@ -5,6 +5,9 @@ const mongoose = require('mongoose')
 const dotenv = require('dotenv')
 dotenv.config()
 const cors = require('cors')
+const authorization = require("./middleware/authorization");
+const authRoutes = require("./routes/auth");
+const jobRoutes = require("./routes/job");
 
 app.get('/health', (req, res) => {
     res.json({
