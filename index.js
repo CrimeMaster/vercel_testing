@@ -1,9 +1,14 @@
-const express = require('express');
+const express = require('express')
 const mongoose = require('mongoose')
+const bodyParser = require('body-parser')
 const app = express()
 const dotenv = require('dotenv')
 dotenv.config()
-const authorization = require("./middleware/authorization");
+const cors = require('cors')
+
+app.use(cors())
+app.use(bodyParser.urlencoded({extended: false}))
+app.use(bodyParser.json())
 
 
 app.get('/health', (req, res) => {
@@ -12,12 +17,7 @@ app.get('/health', (req, res) => {
         message: 'server is running',
     })
 })
-app.get("/page", authorization, (req, res) => {
-    res.json({
-      status: "active",
-      message: "running",
-    });
-  });
+
 app.listen(process.env.port, () => {
     mongoose
     .connect(process.env.MONGODB_CONNECT_URI)
