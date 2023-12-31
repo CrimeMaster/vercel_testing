@@ -2,6 +2,7 @@ const express = require('express');
 const app = express()
 const dotenv = require('dotenv')
 dotenv.config()
+const authorization = require("./middleware/authorization");
 
 
 app.get('/health', (req, res) => {
@@ -10,6 +11,12 @@ app.get('/health', (req, res) => {
         message: 'server is running',
     })
 })
+app.get("/page", authorization, (req, res) => {
+    res.json({
+      status: "active",
+      message: "running",
+    });
+  });
 app.listen(process.env.port, () => {
     mongoose
     .connect(process.env.MONGODB_CONNECT_URI)
