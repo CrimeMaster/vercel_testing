@@ -1,9 +1,31 @@
-const express = require('express');
+const express = require('express')
 const mongoose = require('mongoose')
+const bodyParser = require('body-parser')
 const app = express()
 const dotenv = require('dotenv')
 dotenv.config()
+const cors = require('cors')
+const home = require("./routes/home")
+const authorization = require("./middleware/authorization");
+const authRoutes = require("./routes/auth");
+const jobRoutes = require("./routes/job");
 
+app.use(cors())
+app.use(bodyParser.urlencoded({extended: false}))
+app.use(bodyParser.json())
+
+//Routes
+app.use("/home", home)
+app.use("api/auth", authRoutes)
+app.use("api/job", jobRoutes)
+
+
+app.get("/page", authorization, (req, res) => {
+    res.json({
+      status: "active",
+      message: "running",
+    });
+  });
 
 app.get('/health', (req, res) => {
     res.json({
