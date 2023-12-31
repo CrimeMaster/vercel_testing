@@ -11,5 +11,10 @@ app.get('/health', (req, res) => {
     })
 })
 app.listen(process.env.port, () => {
-    console.log(`Server Running Succesfully on http://localhost:${process.env.port}`)
+    mongoose
+    .connect(process.env.MONGODB_CONNECT_URI)
+    .then(() =>
+      console.log(`Server running on http://localhost:${process.env.PORT}`)
+    )
+    .catch((error) => console.log(error));
 })
