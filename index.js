@@ -20,12 +20,7 @@ app.use("api/auth", authRoutes)
 app.use("api/job", jobRoutes)
 
 
-app.get("/page", authorization, (req, res) => {
-    res.json({
-      status: "active",
-      message: "running",
-    });
-  });
+
 
 app.get('/health', (req, res) => {
     res.json({
