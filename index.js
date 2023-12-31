@@ -6,8 +6,7 @@ const app = express()
 const cors = require('cors')
 dotenv.config()
 const authorization = require("./middleware/authorization");
-const authRoutes = require("./routes/auth");
-const jobRoutes = require("./routes/job");
+
 
 
 app.get('/health', (req, res) => {
